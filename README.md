@@ -2,9 +2,9 @@
 
 Demonstration of Amazon::S3::Thin to obtain permissions from an IAM Role attached to an EC2
 
-## Usage
+## on EC2
 
-Create an EC2 instance and S3 bucket with following commands:
+Create an EC2 instance and a S3 bucket with following commands:
 
 ```
 $ cd cdk
@@ -25,3 +25,21 @@ $ carton
 $ carton exec -- perl ./write-message-to-s3.pl BUCKET_NAME KEY MESSAGE
 $ carton exec -- perl ./read-message-from-s3.pl BUCKET_NAME KEY
 ```
+
+## on ECS
+
+Create an Fargate Cluster, Task Definitions, and a S3 bucket with following commands:
+
+```
+$ cd cdk-ecs
+$ npx cdk bootstrap
+$ npx cdk deploy
+```
+
+Push a docker image to ECR
+
+```
+$ AWS_ACCOUNT_ID=*** AWS_ACCESS_KEY_ID=*** AWS_SECRET_ACCESS_KEY=*** AWS_DEFAULT_REGION=*** ./build-and-push-image.sh
+```
+
+and run the tasks manually from the web console.
